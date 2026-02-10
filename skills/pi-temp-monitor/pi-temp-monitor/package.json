@@ -1,0 +1,6 @@
+{
+  "name": "pi-temp-monitor",
+  "version": "0.1.0",
+  "description": "Monitors Raspberry Pi CPU temperature and sends alerts.",
+  "main": "main.py"
+}
