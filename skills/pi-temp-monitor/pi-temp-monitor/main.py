@@ -5,10 +5,8 @@ import json
 
 # Define the temperature threshold
 TEMPERATURE_THRESHOLD_C = 70.0
-# Define the recipient for alerts (your WhatsApp number)
-# This should be fetched from MEMORY.md in a real-world scenario or passed as an argument.
-# For simplicity, I'm hardcoding it for now, based on previous context.
-ALERT_RECIPIENT = "+17864789404"
+# Configure the recipient outside the public repository.
+ALERT_RECIPIENT = os.environ.get("PI_TEMP_ALERT_RECIPIENT")
 
 def get_cpu_temperature():
     try:
@@ -25,6 +23,9 @@ def get_cpu_temperature():
         return f"Error reading temperature: {e}"
 
 def send_alert(message):
+    if not ALERT_RECIPIENT:
+        print("Alert not sent: PI_TEMP_ALERT_RECIPIENT is not configured.")
+        return
     try:
         # Use the OpenClaw message tool to send a WhatsApp message
         # This requires the 'message' tool to be available to the agent.
